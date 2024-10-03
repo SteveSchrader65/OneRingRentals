@@ -11,14 +11,14 @@ const StyledTitleLine = styled.h2`
 `;
 
 const Contact = () => {
-  return (
-    <>
-      <StyledTitleLine>Contact Page</StyledTitleLine>
-      <div style={{margin: "0 5%"}}>
+return (
+  <>
+    <StyledTitleLine>Contact Page</StyledTitleLine>
+    <div style={{margin: "0 5%"}}>
 
-      </div>
-    </>
-  );
+    </div>
+  </>
+);
 };
 
 export default Contact;

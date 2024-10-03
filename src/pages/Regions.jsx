@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { animateScroll as scroll } from 'react-scroll';
 import { AppContext } from "../App";
 import worldMapImage from "../images/worldMap.jpg";
 import { cities } from "../data/cityData";
@@ -37,7 +38,6 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(75, 1fr);
   grid-template-rows: repeat(60, 1fr);
-
   pointer-events: none;
 `;
 
@@ -63,8 +63,10 @@ const CityArea = styled.div`
 
 const Regions = (props) => {
   const { currentCity } = useContext(AppContext);
+
   const handleCityClick = (cityName) => {
-    props.setCurrentCity(cityName)
+    props.setCurrentCity(cityName);
+    scroll.scrollToTop({duration: 1000});
   };
 
   return (
