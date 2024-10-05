@@ -1,5 +1,5 @@
 `
-The OneRing Rentals web-site allows you to view available properties to purchase from across the globe.
+The OneRing Rentals web-site allows you to view available properties to purchase from across the globe. This project is a TAFE assessment, and my second React app.
 
 HEADER
 Select your preferred language from the dropdown menu to the right in the page Header (not currently active).
