@@ -1,7 +1,7 @@
 {
   "name": "assess2v2",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.7.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,13 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@coreui/coreui": "^5.1.2",
-    "@coreui/react": "^5.4.0",
     "@fortawesome/fontawesome-free": "^6.6.0",
-    "node-sass": "^9.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.1",
+    "react-scroll": "^1.9.0",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {
@@ -35,5 +33,9 @@
   "main": "vite.config.js",
   "keywords": [],
   "author": "Stephen Schrader",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SteveSchrader65/OneRingRentals.git"
+  }
 }
