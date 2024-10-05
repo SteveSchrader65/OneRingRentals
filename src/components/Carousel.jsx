@@ -6,14 +6,6 @@ import image4 from "../images/city4.jpg";
 import image5 from "../images/city5.jpg";
 import styled from "styled-components";
 
-const slides = [
-  { img: image1, alt: "Sydney property" },
-  { img: image2, alt: "New York property" },
-  { img: image3, alt: "Tokyo property" },
-  { img: image4, alt: "Perth property" },
-  { img: image5, alt: "Los Angeles property" },
-];
-
 const StyledCarouselContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
@@ -78,6 +70,14 @@ const StyledMarker = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
 `;
+
+const slides = [
+  { img: image1, alt: "Image of Sydney" },
+  { img: image2, alt: "Image of New York" },
+  { img: image3, alt: "Image of Tokyo" },
+  { img: image4, alt: "Image of Perth" },
+  { img: image5, alt: "Image of Los Angeles" },
+];
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

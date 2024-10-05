@@ -57,13 +57,13 @@ const Rentals = () => {
       const filteredProperties = propertyData.filter((prop) => prop.img.startsWith(prefix));
       const loadedProperties = filteredProperties.map((prop) => ({
         src: `/src/images/${prop.img}.jpg`,
-        alt: `${prop.suburb} property`,
+        alt: `${prop.locality} property`,
         price: `${prop.price}`,
         beds: `${prop.beds}`,
         baths: `${prop.baths}`,
         garages: `${prop.garages}`,
         sqm: `${prop.sqm}`,
-        suburb: `${prop.suburb}`,
+        locality: `${prop.locality}`,
         desc: `${prop.desc}`,
       }));
       resolve(loadedProperties);
@@ -93,7 +93,7 @@ const Rentals = () => {
         </StyledIntro>
         <div>
           {properties.length === 0 ? (
-            <p style={{ color: "#eeeeee" }}>No properties loaded</p>
+            <p style={{ color: "#333333" }}>No properties loaded</p>
           ) : (
             properties.map((property, index) => (
               <StyledCard key={index}>
@@ -101,10 +101,11 @@ const Rentals = () => {
                 <StyledContent>
                   <p>Price: {property.price}</p>
                   <p>
-                    {property.beds}&ensp;Beds&emsp;-&emsp;{property.baths}&ensp;Baths&emsp;-&emsp;{property.garages}&ensp;Garages
+                    {property.beds}&ensp;Beds&emsp;-&emsp;{property.baths}&ensp;Baths&emsp;-&emsp;
+                    {property.garages}&ensp;Garages
                   </p>
                   <p>
-                    <strong>Locality:</strong>&ensp;{property.suburb}&emsp;{property.sqm}
+                    <strong>Locality:</strong>&ensp;{property.locality}&emsp;{property.sqm}
                   </p>
                   <p>
                     <strong>Description:</strong>&ensp;{property.desc}

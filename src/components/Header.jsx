@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { Link } from "react-router-dom";
+import { AppContext } from '../App';
 import DropdownMenu from './Dropdown';
 import SearchFeature from './SearchFeature';
 import styled from "styled-components";
@@ -69,7 +71,9 @@ const StyledSearchFeature = styled.div`
   margin-right: 5%;
 `;
 
-const Header = () => {
+const Header = ({ isHomeAnimationApplied, isRentalsAnimationApplied }) => {
+  const {stopAnimation} = useContext(AppContext);
+
   const dropdownItems = [
     { label: "Deutsch", href: "#" },
     { label: "Espanol", href: "#" },
@@ -101,17 +105,30 @@ const Header = () => {
         <StyledDivider />
         <IconChar icon={ICONS.GLOBE} style={{ marginLeft: "25px", marginRight: "5px" }} />
         <StyledDropdown>
-          <DropdownMenu items={dropdownItems} />
+          <DropdownMenu items={dropdownItems}/>
         </StyledDropdown>
       </StyledTopbar>
       <StyledNav>
-        <StyledNavLink to="/">
-          <StyledLogo src="src/images/logo.png" alt="One Ring logo" />
+        <StyledNavLink to="/" onClick={stopAnimation}>
+          <StyledLogo
+            src="src/images/logo.png"
+            alt="One Ring logo"
+            className={isHomeAnimationApplied ? "flashLink" : ""}
+          />
         </StyledNavLink>
-        <StyledNavLink to="/rentals">FIND A RENTAL</StyledNavLink>
-        <StyledNavLink to="/regions">REGIONS</StyledNavLink>
-        <StyledNavLink to="/contact">CONTACT</StyledNavLink>
-        <StyledNavLink to="*"></StyledNavLink>
+        <StyledNavLink
+          to="/rentals"
+          className={isRentalsAnimationApplied ? "flashLink" : ""}
+          onClick={stopAnimation}>
+          FIND A RENTAL
+        </StyledNavLink>
+        <StyledNavLink to="/regions" onClick={stopAnimation}>
+          REGIONS
+        </StyledNavLink>
+        <StyledNavLink to="/contact" onClick={stopAnimation}>
+          CONTACT
+        </StyledNavLink>
+        <StyledNavLink to="*" onClick={stopAnimation}></StyledNavLink>
         <StyledSearchFeature>
           <SearchFeature />
         </StyledSearchFeature>

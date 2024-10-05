@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const DropdownContainer = styled.div`
@@ -24,6 +24,14 @@ const DropdownContent = styled.div`
   width: 125px;
   z-index: 100;
   display: ${(props) => (props.$isOpen ? "block" : "none")};
+  animation: menuBounce 0.4s ease-in-out forwards;
+  transform-origin: top center;
+
+  @keyframes menuBounce {
+    0% { transform: scaleY(0); }
+    80% { transform: scaleY(1.2); }
+    100% { transform: scaleY(1); }
+  }
 `;
 
 const DropdownItem = styled.a`

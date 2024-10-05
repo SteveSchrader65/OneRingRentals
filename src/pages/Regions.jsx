@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import useScrollPacer from "../hooks/useScrollPacer";
 import { AppContext } from "../App";
 import worldMapImage from "../images/worldMap.jpg";
 import { cities } from "../data/cityData";
@@ -20,7 +21,7 @@ const StyledTitleLine = styled.h2`
 const MapContainer = styled.div`
   position: relative;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
 `;
 
 const MapImage = styled.img`
@@ -37,7 +38,6 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(75, 1fr);
   grid-template-rows: repeat(60, 1fr);
-
   pointer-events: none;
 `;
 
@@ -61,30 +61,40 @@ const CityArea = styled.div`
   }
 `;
 
-const Regions = (props) => {
+const Regions = ({setCurrentCity, setIsRentalsAnimationApplied}) => {
   const { currentCity } = useContext(AppContext);
+  const triggerScroll = useScrollPacer(1000);
+
   const handleCityClick = (cityName) => {
-    props.setCurrentCity(cityName)
+    setCurrentCity(cityName);
+    triggerScroll();
+    setIsRentalsAnimationApplied(true);
   };
 
   return (
     <>
-      <StyledTitleLine>Regions Page - Current City: <span>{currentCity}</span></StyledTitleLine>
-      <div style={{margin: "0 5%"}}>
+      <StyledTitleLine>
+        Regions Page - Current City: <span>{currentCity}</span>
+      </StyledTitleLine>
+      <div style={{ margin: "0 5%" }}>
         <MapContainer>
           <MapImage src={worldMapImage} alt="Map" />
           <Grid>
-            {cities.map((city, index) => (
-              <CityArea
-                key={index}
-                x={city.x}
-                y={city.y}
-                width={city.width}
-                height={city.height}
-                onClick={() => handleCityClick(city.name)}>
-                {city.name}
-              </CityArea>
-            ))}
+            {cities.length === 0 ? (
+              <p style={{ color: "#333333" }}>No cities loaded</p>
+            ) : (
+              cities.map((city, index) => (
+                <CityArea
+                  key={index}
+                  x={city.x}
+                  y={city.y}
+                  width={city.width}
+                  height={city.height}
+                  onClick={() => handleCityClick(city.name)}>
+                  {city.name}
+                </CityArea>
+              ))
+            )}
           </Grid>
         </MapContainer>
       </div>
