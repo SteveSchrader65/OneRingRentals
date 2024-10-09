@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import {useState, useEffect, useCallback} from "react";
 import image1 from "../images/city1.jpg";
 import image2 from "../images/city2.jpg";
 import image3 from "../images/city3.jpg";
@@ -72,11 +72,11 @@ const StyledMarker = styled.button`
 `;
 
 const slides = [
-  { img: image1, alt: "Image of Sydney" },
-  { img: image2, alt: "Image of New York" },
-  { img: image3, alt: "Image of Tokyo" },
-  { img: image4, alt: "Image of Perth" },
-  { img: image5, alt: "Image of Los Angeles" },
+  {img: image1, alt: "Image of Sydney"},
+  {img: image2, alt: "Image of New York"},
+  {img: image3, alt: "Image of Tokyo"},
+  {img: image4, alt: "Image of Perth"},
+  {img: image5, alt: "Image of Los Angeles"},
 ];
 
 const Carousel = () => {
@@ -87,15 +87,13 @@ const Carousel = () => {
   const moveSlide = useCallback(() => {
     setCurrentSlide((prevSlide) => {
       if (isReversed) {
-        if (prevSlide > 0)
-          return prevSlide - 1;
+        if (prevSlide > 0) return prevSlide - 1;
         else {
           setIsReversed(false);
           return 1;
         }
       } else {
-        if (prevSlide < slides.length - 1)
-          return prevSlide + 1;
+        if (prevSlide < slides.length - 1) return prevSlide + 1;
         else {
           setIsReversed(true);
           return slides.length - 2;
@@ -130,7 +128,7 @@ const Carousel = () => {
     RIGHTCONTROL: "fa-solid fa-chevron-right",
   };
 
-  const IconChar = ({ icon }) => {
+  const IconChar = ({icon}) => {
     return <i className={`${icon}`}></i>;
   };
 
@@ -143,7 +141,7 @@ const Carousel = () => {
         <StyledCarousel
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}>
-          <StyledCarouselInner style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+          <StyledCarouselInner style={{transform: `translateX(-${currentSlide * 100}%)`}}>
             {slides.map((slide, index) => (
               <StyledSlide key={index}>
                 <StyledImg src={slide.img} alt={slide.alt} />

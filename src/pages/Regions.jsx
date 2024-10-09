@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import {useContext} from "react";
 import useScrollPacer from "../hooks/useScrollPacer";
-import { AppContext } from "../App";
+import {AppContext} from "../App";
 import worldMapImage from "../images/worldMap.jpg";
-import { cities } from "../data/cityData";
+import {cities} from "../data/cityData";
 import styled from "styled-components";
 
 const StyledTitleLine = styled.h2`
@@ -62,7 +62,7 @@ const CityArea = styled.div`
 `;
 
 const Regions = ({setCurrentCity, setIsRentalsAnimationApplied}) => {
-  const { currentCity } = useContext(AppContext);
+  const {currentCity} = useContext(AppContext);
   const triggerScroll = useScrollPacer(1000);
 
   const handleCityClick = (cityName) => {
@@ -76,12 +76,12 @@ const Regions = ({setCurrentCity, setIsRentalsAnimationApplied}) => {
       <StyledTitleLine>
         Regions Page - Current City: <span>{currentCity}</span>
       </StyledTitleLine>
-      <div style={{ margin: "0 5%" }}>
+      <div style={{margin: "0 5%"}}>
         <MapContainer>
           <MapImage src={worldMapImage} alt="Map" />
           <Grid>
             {cities.length === 0 ? (
-              <p style={{ color: "#333333" }}>No cities loaded</p>
+              <p style={{color: "#333333"}}>No cities loaded</p>
             ) : (
               cities.map((city, index) => (
                 <CityArea

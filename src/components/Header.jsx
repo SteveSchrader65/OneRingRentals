@@ -1,8 +1,8 @@
-import { useContext } from 'react';
-import { Link } from "react-router-dom";
-import { AppContext } from '../App';
-import DropdownMenu from './Dropdown';
-import SearchFeature from './SearchFeature';
+import {useContext} from "react";
+import {Link} from "react-router-dom";
+import {AppContext} from "../App";
+import DropdownMenu from "./Dropdown";
+import SearchFeature from "./SearchFeature";
 import styled from "styled-components";
 
 const StyledHeader = styled.header`
@@ -63,7 +63,7 @@ const StyledNavLink = styled(Link)`
 
 const StyledLogo = styled.img`
   height: 5.5rem;
-  `;
+`;
 
 const StyledSearchFeature = styled.div`
   position: relative;
@@ -71,15 +71,21 @@ const StyledSearchFeature = styled.div`
   margin-right: 5%;
 `;
 
-const Header = ({ isHomeAnimationApplied, isRentalsAnimationApplied }) => {
+const Header = ({selectedLanguage, setSelectedLanguage, isHomeAnimationApplied, isRentalsAnimationApplied}) => {
   const {stopAnimation} = useContext(AppContext);
 
   const dropdownItems = [
-    { label: "Deutsch", href: "#" },
-    { label: "Espanol", href: "#" },
-    { label: "Francais", href: "#" },
-    { label: "Portugues", href: "#" },
+    {label: "English", href: "#"},
+    {label: "Deutsch", href: "#"},
+    {label: "Espanol", href: "#"},
+    {label: "Francais", href: "#"},
+    {label: "Portugues", href: "#"},
   ];
+
+  const handleLanguageChange = (language) => {
+    setSelectedLanguage(language);
+    console.log("Selected language:", language);
+  };
 
   const ICONS = {
     LOGIN: "arrow-right-to-bracket",
@@ -87,7 +93,7 @@ const Header = ({ isHomeAnimationApplied, isRentalsAnimationApplied }) => {
     GLOBE: "earth-asia",
   };
 
-  const IconChar = ({ icon, style }) => {
+  const IconChar = ({icon, style}) => {
     return <i className={`fas fa-${icon}`} style={style}></i>;
   };
 
@@ -95,17 +101,21 @@ const Header = ({ isHomeAnimationApplied, isRentalsAnimationApplied }) => {
     <StyledHeader>
       <StyledTopbar>
         <StyledLink href="#">
-          <IconChar icon={ICONS.LOGIN} style={{ marginRight: "5px" }} />
+          <IconChar icon={ICONS.LOGIN} style={{marginRight: "5px"}} />
           Login
         </StyledLink>
         <StyledLink href="#">
-          <IconChar icon={ICONS.REGISTER} style={{ marginLeft: "20px", marginRight: "5px" }} />
+          <IconChar icon={ICONS.REGISTER} style={{marginLeft: "20px", marginRight: "5px"}} />
           Register
         </StyledLink>
         <StyledDivider />
-        <IconChar icon={ICONS.GLOBE} style={{ marginLeft: "25px", marginRight: "5px" }} />
+        <IconChar icon={ICONS.GLOBE} style={{marginLeft: "25px", marginRight: "5px"}} />
         <StyledDropdown>
-          <DropdownMenu items={dropdownItems}/>
+          <DropdownMenu
+            items={dropdownItems}
+            selectedLanguage={selectedLanguage}
+            onItemSelect={handleLanguageChange}
+          />
         </StyledDropdown>
       </StyledTopbar>
       <StyledNav>

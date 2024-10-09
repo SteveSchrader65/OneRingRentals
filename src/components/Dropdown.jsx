@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 
 const DropdownContainer = styled.div`
@@ -7,7 +7,6 @@ const DropdownContainer = styled.div`
 `;
 
 const DropdownButton = styled.button`
-  padding: 2%;
   font-size: 0.8rem;
   display: flex;
   align-items: center;
@@ -28,9 +27,15 @@ const DropdownContent = styled.div`
   transform-origin: top center;
 
   @keyframes menuBounce {
-    0% { transform: scaleY(0); }
-    80% { transform: scaleY(1.2); }
-    100% { transform: scaleY(1); }
+    0% {
+      transform: scaleY(0);
+    }
+    80% {
+      transform: scaleY(1.2);
+    }
+    100% {
+      transform: scaleY(1);
+    }
   }
 `;
 
@@ -45,7 +50,7 @@ const DropdownItem = styled.a`
   }
 `;
 
-const DropdownMenu = ({ items }) => {
+const DropdownMenu = ({items, selectedLanguage, onItemSelect}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -58,6 +63,11 @@ const DropdownMenu = ({ items }) => {
   };
 
   const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
+
+  const handleLanguageSelect = (item) => {
+    onItemSelect(item.label);
     setIsOpen(false);
   };
 
@@ -81,16 +91,25 @@ const DropdownMenu = ({ items }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <DropdownButton onClick={handleToggle} aria-haspopup="true" aria-expanded={isOpen}>
-        English
+        {selectedLanguage}
         <i className={`fas fa-caret-down`} style={{marginLeft: "20px", fontSize: "0.8rem"}}></i>
       </DropdownButton>
       <DropdownContent $isOpen={isOpen} role="menu">
         {items &&
-          items.map((item, index) => (
-            <DropdownItem key={index} href={item.href} role="menuitem">
-              {item.label}
-            </DropdownItem>
-          ))}
+          items
+            .filter((item) => item.label !== selectedLanguage)
+            .map((item, index) => (
+              <DropdownItem
+                key={index}
+                href={item.href}
+                role="menuitem"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLanguageSelect(item);
+                }}>
+                {item.label}
+              </DropdownItem>
+            ))}
       </DropdownContent>
     </DropdownContainer>
   );

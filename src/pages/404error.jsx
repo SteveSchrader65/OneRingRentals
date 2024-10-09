@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import {useEffect} from "react";
 import styled from "styled-components";
 import Image from "../images/404house.jpg";
 
@@ -28,7 +28,7 @@ const Nopage = ({setIsHomeAnimationApplied}) => {
   return (
     <>
       <StyledTitleLine>
-        <span style={{color: "red"}}>404: </span>
+        <span style={{color: "#ff0000"}}>404: </span>
         <span>Uh-oh !! This appears to be a property managed by one of our competitors</span>
       </StyledTitleLine>
       <StyledContainer>

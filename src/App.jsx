@@ -1,15 +1,16 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {useState, createContext} from 'react';
+import {useState, createContext} from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Nopage from "./pages/404error";
 import Home from "./pages/Home";
 import Rentals from "./pages/Rentals";
 import Regions from "./pages/Regions";
 import Contact from "./pages/Contact";
+import Nopage from "./pages/404error";
 export const AppContext = createContext();
 
 function App() {
+  const [selectedLanguage, setSelectedLanguage] = useState("English");
   const [currentCity, setCurrentCity] = useState("Perth");
   const [isHomeAnimationApplied, setIsHomeAnimationApplied] = useState(false);
   const [isRentalsAnimationApplied, setIsRentalsAnimationApplied] = useState(false);
@@ -21,8 +22,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AppContext.Provider value={{ currentCity, stopAnimation }}>
+      <AppContext.Provider value={{currentCity, stopAnimation}}>
         <Header
+          selectedLanguage={selectedLanguage}
+          setSelectedLanguage={setSelectedLanguage}
           isHomeAnimationApplied={isHomeAnimationApplied}
           isRentalsAnimationApplied={isRentalsAnimationApplied}
         />
@@ -39,7 +42,7 @@ function App() {
                 />
               }
             />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<Contact selectedLanguage={selectedLanguage} />} />
             <Route
               path="*"
               element={<Nopage setIsHomeAnimationApplied={setIsHomeAnimationApplied} />}

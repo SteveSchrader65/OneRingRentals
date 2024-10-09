@@ -25,7 +25,8 @@ const StyledSocialLink = styled.a`
   cursor: pointer;
   border: 1px solid #888888;
   border-radius: 3px;
-  padding: 10px;
+  height: 2rem;
+  width: 2rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -52,26 +53,13 @@ const Footer = () => {
   return (
     <StyledFooter>
       <StyledContentArea>
-        <p style={{ paddingLeft: "5%" }}>&copy;{new Date().getFullYear()} Steve Schrader</p>
-        <div style={{ paddingRight: "5%" }}>
-          <StyledSocialLink href="#">
-            <IconChar icon={ICONS.FACEBOOK} />
-          </StyledSocialLink>
-          <StyledSocialLink href="#">
-            <IconChar icon={ICONS.TWITTER} />
-          </StyledSocialLink>
-          <StyledSocialLink href="#">
-            <IconChar icon={ICONS.GOOGLE} />
-          </StyledSocialLink>
-          <StyledSocialLink href="#">
-            <IconChar icon={ICONS.PINTEREST} />
-          </StyledSocialLink>
-          <StyledSocialLink href="#">
-            <IconChar icon={ICONS.YOUTUBE} />
-          </StyledSocialLink>
-          <StyledSocialLink href="#">
-            <IconChar icon={ICONS.RSS} />
-          </StyledSocialLink>
+        <p style={{paddingLeft: "5%"}}>&copy;{new Date().getFullYear()} Steve Schrader</p>
+        <div style={{paddingRight: "5%"}}>
+          {Object.keys(ICONS).map((icon) => (
+            <StyledSocialLink key={icon}>
+              <IconChar icon={ICONS[icon]} aria-hidden="true" />
+            </StyledSocialLink>
+          ))}
         </div>
       </StyledContentArea>
     </StyledFooter>

@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
-import { AppContext } from "../App";
-import { cities } from "../data/cityData";
-import { properties as propertyData } from "../data/propertyData";
+import {useState, useEffect, useContext} from "react";
+import {AppContext} from "../App";
+import {cities} from "../data/cityData";
+import {properties as propertyData} from "../data/propertyData";
 import styled from "styled-components";
 
 const StyledTitleLine = styled.h2`
@@ -48,7 +48,7 @@ const StyledContent = styled.div`
 `;
 
 const Rentals = () => {
-  const { currentCity } = useContext(AppContext);
+  const {currentCity} = useContext(AppContext);
   const [_, setCurrentCode] = useState("");
   const [properties, setProperties] = useState([]);
 
@@ -87,13 +87,13 @@ const Rentals = () => {
   return (
     <>
       <StyledTitleLine>Rentals Page</StyledTitleLine>
-      <div style={{ margin: "0 5%" }}>
+      <div style={{margin: "0 5%"}}>
         <StyledIntro>
           One Ring Rentals currently have a number of property listings for {currentCity}:
         </StyledIntro>
         <div>
           {properties.length === 0 ? (
-            <p style={{ color: "#333333" }}>No properties loaded</p>
+            <p style={{color: "#333333"}}>No properties loaded</p>
           ) : (
             properties.map((property, index) => (
               <StyledCard key={index}>

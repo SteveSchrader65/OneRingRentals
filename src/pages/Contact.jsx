@@ -1,4 +1,5 @@
-import { useState } from "react";
+import {useState, useContext} from "react";
+import {AppContext} from "../App";
 import styled from "styled-components";
 
 const StyledTitleLine = styled.h2`
@@ -92,7 +93,8 @@ const StyledSubmit = styled.button`
   }
 `;
 
-const Contact = () => {
+const Contact = ({selectedLanguage}) => {
+  const {currentCity} = useContext(AppContext);
   const [formData, setFormData] = useState({
     name: "",
     role: "",
@@ -104,7 +106,7 @@ const Contact = () => {
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -113,7 +115,17 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    alert(
+      `Current City: ${currentCity}\n
+      Language: ${selectedLanguage}\n
+      Name: ${formData.name}\n
+      Role: ${formData.role}\n
+      Country: ${formData.country}\n
+      E-mail: ${formData.email}\n
+      Phone: ${formData.phone}\n
+      Enquiry: ${formData.enquiryType}\n
+      Comment: ${formData.comment}`
+    );
   };
 
   const ICONS = {
@@ -121,18 +133,18 @@ const Contact = () => {
     CLIPBOARD: "clipboard-question",
   };
 
-  const IconChar = ({ icon, style }) => {
+  const IconChar = ({icon, style}) => {
     return <i className={`fas fa-${icon}`} style={style}></i>;
   };
 
   return (
     <>
       <StyledTitleLine>Contact Page</StyledTitleLine>
-      <div style={{ margin: "0 5%" }}>
+      <div style={{margin: "0 5%"}}>
         <StyledFormContainer onSubmit={handleSubmit}>
           <StyledFormWrapper>
             <StyledHeading>
-              <IconChar icon={ICONS.USER} style={{ fontSize: "3rem", marginRight: "5%" }} />
+              <IconChar icon={ICONS.USER} style={{fontSize: "3rem", marginRight: "5%"}} />
               About you
             </StyledHeading>
             <StyledFormGroup>
@@ -166,10 +178,8 @@ const Contact = () => {
               </StyledRadioGroup>
             </StyledFormGroup>
           </StyledFormWrapper>
-
           <StyledFormWrapper>
-            <StyledHeading style={{ visibility: "hidden", height: "15%" }}>
-            </StyledHeading>
+            <StyledHeading style={{visibility: "hidden", height: "15%"}}></StyledHeading>
             <StyledFormGroup>
               <StyledLabel htmlFor="country">You live in ...</StyledLabel>
               <StyledSelect
@@ -221,7 +231,7 @@ const Contact = () => {
           </StyledFormWrapper>
           <StyledFormWrapper>
             <StyledHeading>
-              <IconChar icon={ICONS.CLIPBOARD} style={{ fontSize: "3rem", marginRight: "2%" }} />
+              <IconChar icon={ICONS.CLIPBOARD} style={{fontSize: "3rem", marginRight: "2%"}} />
               Your enquiry details
             </StyledHeading>
             <StyledFormGroup>

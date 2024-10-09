@@ -3,7 +3,6 @@ import { animateScroll as scroll } from "react-scroll";
 
 // This custom hook allows setting of 'speed' by calculating
 // and modifying the required duration to perform the scroll
-// at the set speed
 const useScrollPacer = (duration = 1000) => {
   const [_, setScrollDistance] = useState(0);
 
