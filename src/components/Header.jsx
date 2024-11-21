@@ -114,15 +114,23 @@ const Header = ({
       <StyledTopbar>
         <StyledLink href="#">
           <IconChar icon={ICONS.LOGIN} style={{marginRight: "5px"}} />
+          <IconChar icon={ICONS.LOGIN} style={{marginRight: "5px"}} />
           Login
         </StyledLink>
         <StyledLink href="#">
+          <IconChar icon={ICONS.REGISTER} style={{marginLeft: "20px", marginRight: "5px"}} />
           <IconChar icon={ICONS.REGISTER} style={{marginLeft: "20px", marginRight: "5px"}} />
           Register
         </StyledLink>
         <StyledDivider />
         <IconChar icon={ICONS.GLOBE} style={{marginLeft: "25px", marginRight: "5px"}} />
+        <IconChar icon={ICONS.GLOBE} style={{marginLeft: "25px", marginRight: "5px"}} />
         <StyledDropdown>
+          <DropdownMenu
+            items={dropdownItems}
+            selectedLanguage={selectedLanguage}
+            onItemSelect={handleLanguageChange}
+          />
           <DropdownMenu
             items={dropdownItems}
             selectedLanguage={selectedLanguage}

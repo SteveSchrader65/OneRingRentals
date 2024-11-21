@@ -2,6 +2,10 @@ import {useState, useEffect, useContext} from "react";
 import {AppContext} from "../App";
 import {cities} from "../data/cityData";
 import {properties as propertyData} from "../data/propertyData";
+import {useState, useEffect, useContext} from "react";
+import {AppContext} from "../App";
+import {cities} from "../data/cityData";
+import {properties as propertyData} from "../data/propertyData";
 import styled from "styled-components";
 
 // Styled components for page layout and element styling
@@ -61,11 +65,13 @@ const Rentals = () => {
       const loadedProperties = filteredProperties.map((prop) => ({
         src: `/src/images/${prop.img}.jpg`,
         alt: `${prop.locality} property`,
+        alt: `${prop.locality} property`,
         price: `${prop.price}`,
         beds: `${prop.beds}`,
         baths: `${prop.baths}`,
         garages: `${prop.garages}`,
         sqm: `${prop.sqm}`,
+        locality: `${prop.locality}`,
         locality: `${prop.locality}`,
         desc: `${prop.desc}`,
       }))
@@ -92,6 +98,7 @@ const Rentals = () => {
     <>
       <StyledTitleLine>Rentals Page</StyledTitleLine>
       <div style={{margin: "0 5%"}}>
+      <div style={{margin: "0 5%"}}>
         <StyledIntro>
           One Ring Rentals currently have a number of property listings for {currentCity}:
         </StyledIntro>
@@ -99,6 +106,7 @@ const Rentals = () => {
         {/* Display property cards, or "No properties" message if none */}
         <div>
           {properties.length === 0 ? (
+            <p style={{color: "#333333"}}>No properties loaded</p>
             <p style={{color: "#333333"}}>No properties loaded</p>
           ) : (
 
@@ -111,8 +119,11 @@ const Rentals = () => {
                   <p>
                     {property.beds}&ensp;Beds&emsp;-&emsp;{property.baths}&ensp;Baths&emsp;-&emsp;
                     {property.garages}&ensp;Garages
+                    {property.beds}&ensp;Beds&emsp;-&emsp;{property.baths}&ensp;Baths&emsp;-&emsp;
+                    {property.garages}&ensp;Garages
                   </p>
                   <p>
+                    <strong>Locality:</strong>&ensp;{property.locality}&emsp;{property.sqm}
                     <strong>Locality:</strong>&ensp;{property.locality}&emsp;{property.sqm}
                   </p>
                   <p>
@@ -129,3 +140,4 @@ const Rentals = () => {
 };
 
 export default Rentals;
+

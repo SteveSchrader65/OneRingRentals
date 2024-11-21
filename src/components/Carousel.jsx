@@ -152,6 +152,7 @@ const Carousel = () => {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}>
           <StyledCarouselInner style={{transform: `translateX(-${currentSlide * 100}%)`}}>
+          <StyledCarouselInner style={{transform: `translateX(-${currentSlide * 100}%)`}}>
             {slides.map((slide, index) => (
               <StyledSlide key={index}>
                 <StyledImg src={slide.img} alt={slide.alt} />

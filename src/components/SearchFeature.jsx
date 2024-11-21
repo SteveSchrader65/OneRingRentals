@@ -1,9 +1,11 @@
 import {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 
 // Styled components to style and control search UI elements
 const SearchContainer = styled.div`
   position: relative;
+  width: ${({$expanded}) => ($expanded ? "200px" : "40px")};
   width: ${({$expanded}) => ($expanded ? "200px" : "40px")};
   height: 40px;
   transition: width 0.5s ease-in-out;
@@ -21,6 +23,7 @@ const StyledSearchButton = styled.button`
   justify-content: flex-end;
   cursor: pointer;
   padding: ${({$expanded}) => ($expanded ? "0 20px 0 5px" : "0")};
+  padding: ${({$expanded}) => ($expanded ? "0 20px 0 5px" : "0")};
   padding-right: 11px;
   transition: all 0.25s ease-in-out;
   overflow: hidden;
@@ -33,6 +36,7 @@ const StyledSearchInput = styled.input`
   border: none;
   outline: none;
   margin-left: 10px;
+  opacity: ${({$expanded}) => ($expanded ? "1" : "0")};
   opacity: ${({$expanded}) => ($expanded ? "1" : "0")};
   transition: opacity 0.5s ease-in-out;
 `;
@@ -86,6 +90,16 @@ const SearchFeature = () => {
   return (
     <SearchContainer ref={searchRef} $expanded={expanded}>
       <StyledSearchButton onClick={toggleExpand} $expanded={expanded}>
+        <StyledSearchInput
+          ref={toggleRef}
+          $expanded={expanded}
+          type="text"
+          name="search"
+          value={searchTerm}
+          placeholder="Search ..."
+          onChange={handleInput}
+        />
+        <i className="fas fa-search" style={{flexShrink: 0}} />
         <StyledSearchInput
           ref={toggleRef}
           $expanded={expanded}

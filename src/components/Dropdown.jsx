@@ -1,4 +1,5 @@
 import {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 
 // Styled components for dropdown menu elements
@@ -25,6 +26,20 @@ const DropdownContent = styled.div`
   width: 125px;
   z-index: 100;
   display: ${(props) => (props.$isOpen ? "block" : "none")};
+  animation: menuBounce 0.4s ease-in-out forwards;
+  transform-origin: top center;
+
+  @keyframes menuBounce {
+    0% {
+      transform: scaleY(0);
+    }
+    80% {
+      transform: scaleY(1.2);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
   animation: menuBounce 0.4s ease-in-out forwards;
   transform-origin: top center;
 
@@ -99,6 +114,7 @@ const DropdownMenu = ({items, selectedLanguage, onItemSelect}) => {
       onMouseLeave={handleMouseLeave}>
       {/* Dropdown trigger button */}
       <DropdownButton onClick={handleToggle} aria-haspopup="true" aria-expanded={isOpen}>
+        {selectedLanguage}
         {selectedLanguage}
         <i className={`fas fa-caret-down`} style={{marginLeft: "20px", fontSize: "0.8rem"}}></i>
       </DropdownButton>

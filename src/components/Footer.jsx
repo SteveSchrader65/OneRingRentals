@@ -28,6 +28,8 @@ const StyledSocialLink = styled.a`
   border-radius: 3px;
   height: 2rem;
   width: 2rem;
+  height: 2rem;
+  width: 2rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
