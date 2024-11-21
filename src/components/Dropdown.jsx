@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect } from "react";
+import {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 
+// Styled components for dropdown menu elements
 const DropdownContainer = styled.div`
   position: relative;
   display: inline-block;
 `;
 
 const DropdownButton = styled.button`
-  padding: 2%;
   font-size: 0.8rem;
   display: flex;
   align-items: center;
@@ -16,6 +16,7 @@ const DropdownButton = styled.button`
   border: none;
 `;
 
+// Styled component for dropdown content (with bounce animation)
 const DropdownContent = styled.div`
   position: absolute;
   top: 98%;
@@ -24,6 +25,20 @@ const DropdownContent = styled.div`
   width: 125px;
   z-index: 100;
   display: ${(props) => (props.$isOpen ? "block" : "none")};
+  animation: menuBounce 0.4s ease-in-out forwards;
+  transform-origin: top center;
+
+  @keyframes menuBounce {
+    0% {
+      transform: scaleY(0);
+    }
+    80% {
+      transform: scaleY(1.2);
+    }
+    100% {
+      transform: scaleY(1);
+    }
+  }
 `;
 
 const DropdownItem = styled.a`
@@ -37,34 +52,44 @@ const DropdownItem = styled.a`
   }
 `;
 
-const DropdownMenu = ({ items }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+const DropdownMenu = ({items, selectedLanguage, onItemSelect}) => {
+  // Set state for dropdown menu status and define ref
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef(null)
 
+  // Toggle dropdown visibility
   const handleToggle = () => {
-    setIsOpen((prevState) => !prevState);
-  };
+    setIsOpen((prevState) => !prevState)
+  }
 
+  // Handle mouse interactions over menu
   const handleMouseEnter = () => {
-    setIsOpen(true);
-  };
+    setIsOpen(true)
+  }
 
   const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
+  // Set language selection and close dropdown
+  const handleLanguageSelect = (item) => {
+    onItemSelect(item.label)
+    setIsOpen(false)
+  }
+
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
+        setIsOpen(false)
       }
-    };
+    }
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
   return (
     <DropdownContainer
@@ -72,20 +97,32 @@ const DropdownMenu = ({ items }) => {
       ref={dropdownRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
+      {/* Dropdown trigger button */}
       <DropdownButton onClick={handleToggle} aria-haspopup="true" aria-expanded={isOpen}>
-        English
+        {selectedLanguage}
         <i className={`fas fa-caret-down`} style={{marginLeft: "20px", fontSize: "0.8rem"}}></i>
       </DropdownButton>
+
+      {/* Filtered dropdown menu items (exclude current language) */}
       <DropdownContent $isOpen={isOpen} role="menu">
         {items &&
-          items.map((item, index) => (
-            <DropdownItem key={index} href={item.href} role="menuitem">
-              {item.label}
-            </DropdownItem>
-          ))}
+          items
+            .filter((item) => item.label !== selectedLanguage)
+            .map((item, index) => (
+              <DropdownItem
+                key={index}
+                href={item.href}
+                role="menuitem"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleLanguageSelect(item)
+                }}>
+                {item.label}
+              </DropdownItem>
+            ))}
       </DropdownContent>
     </DropdownContainer>
-  );
+  )
 };
 
 export default DropdownMenu;

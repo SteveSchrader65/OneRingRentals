@@ -6,5 +6,22 @@
 body {
   background-color: #fafafa;
   margin: 0;
+  overflow-x: hidden;
 }
 
+.flashLink {
+  animation: flashLinkAnimation 1s ease-in-out infinite;
+}
+@keyframes flashLinkAnimation {
+  0% { transform: scale(1.0); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.0); }
+}
+
+#groupOne {
+  flex-direction: column;
+}
+
+#groupTwo {
+  flex-direction: row;
+}

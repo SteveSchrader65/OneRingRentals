@@ -1,9 +1,10 @@
-import { useState, useEffect, useContext } from "react";
-import { AppContext } from "../App";
-import { cities } from "../data/cityData";
-import { properties as propertyData } from "../data/propertyData";
+import {useState, useEffect, useContext} from "react";
+import {AppContext} from "../App";
+import {cities} from "../data/cityData";
+import {properties as propertyData} from "../data/propertyData";
 import styled from "styled-components";
 
+// Styled components for page layout and element styling
 const StyledTitleLine = styled.h2`
   background-color: #333333;
   color: #fefefe;
@@ -48,63 +49,71 @@ const StyledContent = styled.div`
 `;
 
 const Rentals = () => {
-  const { currentCity } = useContext(AppContext);
-  const [_, setCurrentCode] = useState("");
-  const [properties, setProperties] = useState([]);
+  // Get current city from context and initialize states
+  const {currentCity} = useContext(AppContext)
+  const [_, setCurrentCode] = useState("")
+  const [properties, setProperties] = useState([])
 
+  // Filter and format property data based on city prefix
   const loadProperties = (prefix) => {
     return new Promise((resolve) => {
-      const filteredProperties = propertyData.filter((prop) => prop.img.startsWith(prefix));
+      const filteredProperties = propertyData.filter((prop) => prop.img.startsWith(prefix))
       const loadedProperties = filteredProperties.map((prop) => ({
         src: `/src/images/${prop.img}.jpg`,
-        alt: `${prop.suburb} property`,
+        alt: `${prop.locality} property`,
         price: `${prop.price}`,
         beds: `${prop.beds}`,
         baths: `${prop.baths}`,
         garages: `${prop.garages}`,
         sqm: `${prop.sqm}`,
-        suburb: `${prop.suburb}`,
+        locality: `${prop.locality}`,
         desc: `${prop.desc}`,
-      }));
-      resolve(loadedProperties);
-    });
-  };
+      }))
+      resolve(loadedProperties)
+    })
+  }
 
+  // Load properties when component mounts
   useEffect(() => {
-    const city = cities.find((city) => city.name === currentCity);
+    const city = cities.find((city) => city.name === currentCity)
     if (city) {
-      setCurrentCode(city.prefix);
+      setCurrentCode(city.prefix)
       loadProperties(city.prefix)
         .then((loadedProperties) => {
-          setProperties(loadedProperties);
+          setProperties(loadedProperties)
         })
         .catch((error) => {
-          console.error("Error loading properties:", error);
-        });
+          console.error("Error loading properties:", error)
+        })
     }
-  }, []);
+  }, [])
 
   return (
     <>
       <StyledTitleLine>Rentals Page</StyledTitleLine>
-      <div style={{ margin: "0 5%" }}>
+      <div style={{margin: "0 5%"}}>
         <StyledIntro>
           One Ring Rentals currently have a number of property listings for {currentCity}:
         </StyledIntro>
+
+        {/* Display property cards, or "No properties" message if none */}
         <div>
           {properties.length === 0 ? (
-            <p style={{ color: "#eeeeee" }}>No properties loaded</p>
+            <p style={{color: "#333333"}}>No properties loaded</p>
           ) : (
+
+            // Map over properties array and create a card for each
             properties.map((property, index) => (
               <StyledCard key={index}>
                 <StyledImage src={property.src} alt={property.alt} />
                 <StyledContent>
                   <p>Price: {property.price}</p>
                   <p>
-                    {property.beds}&ensp;Beds&emsp;-&emsp;{property.baths}&ensp;Baths&emsp;-&emsp;{property.garages}&ensp;Garages
+                    {property.beds}&ensp;Beds&emsp;-&emsp;{property.baths}&ensp;Baths&emsp;-&emsp;
+                    {property.garages}&ensp;Garages
                   </p>
                   <p>
-                    <strong>Locality:</strong>&ensp;{property.suburb}&emsp;{property.sqm}
+                    <strong>Locality:</strong>&ensp;{property.locality}&emsp;{property.sqm}
                   </p>
                   <p>
                     <strong>Description:</strong>&ensp;{property.desc}
@@ -116,7 +125,7 @@ const Rentals = () => {
         </div>
       </div>
     </>
-  );
+  )
 };
 
 export default Rentals;

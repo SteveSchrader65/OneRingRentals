@@ -1,10 +1,11 @@
-import { useContext } from "react";
-import { animateScroll as scroll } from 'react-scroll';
-import { AppContext } from "../App";
-import worldMapImage from "../images/worldMap.jpg";
-import { cities } from "../data/cityData";
-import styled from "styled-components";
+import {useContext} from "react"
+import useScrollPacer from "../hooks/useScrollPacer"
+import {AppContext} from "../App"
+import worldMapImage from "../images/worldMap.jpg"
+import {cities} from "../data/cityData"
+import styled from "styled-components"
 
+// Styled components for page layout and element styling
 const StyledTitleLine = styled.h2`
   background-color: #333333;
   color: #fefefe;
@@ -16,19 +17,20 @@ const StyledTitleLine = styled.h2`
   span {
     color: #ffff00;
   }
-`;
+`
 
 const MapContainer = styled.div`
   position: relative;
   width: 100%;
-  margin: 0 auto;
-`;
+  margin: 0;
+`
 
 const MapImage = styled.img`
   width: 100%;
   height: auto;
-`;
+`
 
+// Grid overlay for positioning city markers
 const Grid = styled.div`
   position: absolute;
   top: 0;
@@ -39,8 +41,9 @@ const Grid = styled.div`
   grid-template-columns: repeat(75, 1fr);
   grid-template-rows: repeat(60, 1fr);
   pointer-events: none;
-`;
+`
 
+// C.S.S creates clickable areas for each city with hover effects
 const CityArea = styled.div`
   grid-column: ${(props) => props.x} / span ${(props) => props.width};
   grid-row: ${(props) => props.y} / span ${2};
@@ -59,39 +62,52 @@ const CityArea = styled.div`
     background-color: rgba(255, 255, 0, 0.6);
     cursor: pointer;
   }
-`;
+`
 
-const Regions = (props) => {
-  const { currentCity } = useContext(AppContext);
+const Regions = ({setCurrentCity, setIsRentalsAnimationApplied}) => {
+  // Get current city from context and set timer for scrolling controller
+  const {currentCity} = useContext(AppContext)
+  const triggerScroll = useScrollPacer(1000)
 
+  // Handle city selection and trigger animations
   const handleCityClick = (cityName) => {
-    props.setCurrentCity(cityName);
-    scroll.scrollToTop({duration: 1000});
-  };
+    setCurrentCity(cityName)
+    setIsRentalsAnimationApplied(true)
+    triggerScroll()
+  }
 
   return (
     <>
-      <StyledTitleLine>Regions Page - Current City: <span>{currentCity}</span></StyledTitleLine>
+      <StyledTitleLine>
+        Regions Page - Current City: <span>{currentCity}</span>
+      </StyledTitleLine>
       <div style={{margin: "0 5%"}}>
         <MapContainer>
           <MapImage src={worldMapImage} alt="Map" />
+
+          {/* Create grid overlay with city markers */}
           <Grid>
-            {cities.map((city, index) => (
-              <CityArea
-                key={index}
-                x={city.x}
-                y={city.y}
-                width={city.width}
-                height={city.height}
-                onClick={() => handleCityClick(city.name)}>
-                {city.name}
-              </CityArea>
-            ))}
+            {cities.length === 0 ? (
+              <p style={{color: "#333333"}}>No cities loaded</p>
+            ) : (
+              cities.map((city, index) => (
+                // Create clickable areas for each city
+                <CityArea
+                  key={index}
+                  x={city.x}
+                  y={city.y}
+                  width={city.width}
+                  height={city.height}
+                  onClick={() => handleCityClick(city.name)}>
+                  {city.name}
+                </CityArea>
+              ))
+            )}
           </Grid>
         </MapContainer>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Regions;
+export default Regions
