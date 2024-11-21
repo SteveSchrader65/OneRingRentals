@@ -1,5 +1,4 @@
 import {useState, useEffect, useRef} from "react";
-import {useState, useEffect, useRef} from "react";
 import styled from "styled-components";
 
 // Styled components for dropdown menu elements
@@ -114,7 +113,6 @@ const DropdownMenu = ({items, selectedLanguage, onItemSelect}) => {
       onMouseLeave={handleMouseLeave}>
       {/* Dropdown trigger button */}
       <DropdownButton onClick={handleToggle} aria-haspopup="true" aria-expanded={isOpen}>
-        {selectedLanguage}
         {selectedLanguage}
         <i className={`fas fa-caret-down`} style={{marginLeft: "20px", fontSize: "0.8rem"}}></i>
       </DropdownButton>

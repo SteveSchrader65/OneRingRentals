@@ -81,9 +81,6 @@ const Regions = ({setCurrentCity, setIsRentalsAnimationApplied}) => {
       <StyledTitleLine>
         Regions Page - Current City: <span>{currentCity}</span>
       </StyledTitleLine>
-      <StyledTitleLine>
-        Regions Page - Current City: <span>{currentCity}</span>
-      </StyledTitleLine>
       <div style={{margin: "0 5%"}}>
         <MapContainer>
           <MapImage src={worldMapImage} alt="Map" />

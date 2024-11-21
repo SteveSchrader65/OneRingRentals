@@ -2,10 +2,6 @@ import {useState, useEffect, useContext} from "react";
 import {AppContext} from "../App";
 import {cities} from "../data/cityData";
 import {properties as propertyData} from "../data/propertyData";
-import {useState, useEffect, useContext} from "react";
-import {AppContext} from "../App";
-import {cities} from "../data/cityData";
-import {properties as propertyData} from "../data/propertyData";
 import styled from "styled-components";
 
 // Styled components for page layout and element styling
@@ -65,13 +61,11 @@ const Rentals = () => {
       const loadedProperties = filteredProperties.map((prop) => ({
         src: `/src/images/${prop.img}.jpg`,
         alt: `${prop.locality} property`,
-        alt: `${prop.locality} property`,
         price: `${prop.price}`,
         beds: `${prop.beds}`,
         baths: `${prop.baths}`,
         garages: `${prop.garages}`,
         sqm: `${prop.sqm}`,
-        locality: `${prop.locality}`,
         locality: `${prop.locality}`,
         desc: `${prop.desc}`,
       }))
