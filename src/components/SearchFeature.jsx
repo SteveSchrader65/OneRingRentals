@@ -96,16 +96,6 @@ const SearchFeature = () => {
           onChange={handleInput}
         />
         <i className="fas fa-search" style={{flexShrink: 0}} />
-        <StyledSearchInput
-          ref={toggleRef}
-          $expanded={expanded}
-          type="text"
-          name="search"
-          value={searchTerm}
-          placeholder="Search ..."
-          onChange={handleInput}
-        />
-        <i className="fas fa-search" style={{flexShrink: 0}} />
       </StyledSearchButton>
     </SearchContainer>
   )
